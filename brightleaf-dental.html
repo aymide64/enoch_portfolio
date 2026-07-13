@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brightleaf Dental — Modern Family &amp; Cosmetic Dentistry</title>
+<meta name="description" content="Brightleaf Dental — book your appointment online in under a minute.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bone:#F7F3EC;
+    --bone-2:#EFE9DD;
+    --teal:#12332F;
+    --teal-2:#1B4842;
+    --gold:#C98A3E;
+    --gold-light:#E7B876;
+    --mint:#BFE0CB;
+    --ink:#1C2320;
+    --muted:#5B6560;
+    --line:#DDD5C4;
+    --display:'Fraunces', serif;
+    --sans:'Inter', -apple-system, sans-serif;
+    --mono:'IBM Plex Mono', monospace;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;} }
+  body{margin:0; background:var(--bone); color:var(--ink); font-family:var(--sans); line-height:1.6;}
+  a{color:inherit;}
+  ::selection{background:var(--gold-light); color:var(--teal);}
+  :focus-visible{outline:2px solid var(--teal); outline-offset:3px;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 1.5rem;}
+
+  /* banner linking back */
+  .demo-banner{
+    background:var(--teal); color:var(--bone); font-family:var(--mono); font-size:0.78rem;
+    text-align:center; padding:0.6rem 1rem;
+  }
+  .demo-banner a{color:var(--gold-light); text-decoration:underline; font-weight:600;}
+
+  header.nav{
+    position:sticky; top:0; z-index:50; background:rgba(247,243,236,0.92); backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{max-width:1120px; margin:0 auto; padding:1.1rem 1.5rem; display:flex; align-items:center; justify-content:space-between;}
+  .logo{font-family:var(--display); font-weight:600; font-size:1.35rem; color:var(--teal); letter-spacing:-0.01em;}
+  .logo span{color:var(--gold);}
+  nav.links{display:flex; gap:2rem; font-size:0.92rem; font-weight:500;}
+  nav.links a{text-decoration:none; color:var(--teal);}
+  nav.links a:hover{color:var(--gold);}
+  .nav-cta{
+    background:var(--teal); color:var(--bone); padding:0.65rem 1.3rem; border-radius:999px;
+    font-weight:600; font-size:0.88rem; text-decoration:none; white-space:nowrap;
+  }
+  .nav-cta:hover{background:var(--teal-2);}
+  .menu-toggle{display:none;}
+
+  /* HERO */
+  .hero{padding:4.5rem 0 3.5rem;}
+  .hero-grid{display:grid; grid-template-columns:1.05fr 0.95fr; gap:3rem; align-items:center;}
+  .eyebrow{
+    font-family:var(--mono); font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--gold); background:rgba(201,138,62,0.12); display:inline-block; padding:0.35rem 0.75rem;
+    border-radius:999px; margin:0 0 1.1rem;
+  }
+  h1{font-family:var(--display); font-size:clamp(2.3rem,4.6vw,3.4rem); font-weight:600; line-height:1.08; margin:0 0 1.1rem; color:var(--teal);}
+  h1 em{font-style:italic; color:var(--gold);}
+  .hero p.lead{font-size:1.12rem; color:var(--muted); max-width:44ch; margin:0 0 1.8rem;}
+  .hero-actions{display:flex; gap:0.9rem; flex-wrap:wrap; align-items:center;}
+  .btn{font-weight:600; padding:0.85rem 1.5rem; border-radius:999px; font-size:0.95rem; text-decoration:none; display:inline-flex; align-items:center; gap:0.5rem; transition:transform .15s ease, background .15s ease;}
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:var(--gold); color:var(--teal);}
+  .btn-primary:hover{background:var(--gold-light);}
+  .btn-outline{border:1.5px solid var(--teal); color:var(--teal);}
+  .trust-row{display:flex; gap:1.6rem; margin-top:1.8rem; flex-wrap:wrap;}
+  .trust-row .stat b{display:block; font-family:var(--display); font-size:1.5rem; color:var(--teal);}
+  .trust-row .stat span{font-size:0.8rem; color:var(--muted);}
+
+  .hero-visual{
+    background:var(--teal); border-radius:20px; padding:1.8rem; color:var(--bone);
+    box-shadow:0 30px 70px -30px rgba(18,51,47,0.45); position:relative; overflow:hidden;
+  }
+  .tooth-badge{
+    width:64px; height:64px; border-radius:50%; background:var(--mint); display:flex; align-items:center; justify-content:center;
+    margin-bottom:1.2rem;
+  }
+  .hero-visual h3{font-family:var(--display); font-weight:500; font-size:1.3rem; margin:0 0 0.4rem;}
+  .hero-visual p{color:#CBD8D3; font-size:0.92rem; margin:0 0 1.4rem;}
+  .mini-slot{display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.14); border-radius:10px; padding:0.7rem 0.9rem; margin-bottom:0.6rem; font-family:var(--mono); font-size:0.82rem;}
+  .mini-slot .ok{color:var(--mint);}
+
+  hr.rule{border:none; border-top:1px solid var(--line); margin:0;}
+  section{padding:4.5rem 0;}
+  h2.section-title{font-family:var(--display); font-size:2rem; font-weight:600; color:var(--teal); margin:0 0 0.6rem;}
+  p.section-sub{color:var(--muted); max-width:56ch; margin:0 0 2.4rem;}
+
+  /* SERVICES */
+  .services-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem;}
+  .service-card{background:#fff; border:1px solid var(--line); border-radius:14px; padding:1.6rem;}
+  .service-card .icon{width:44px; height:44px; border-radius:10px; background:var(--bone-2); display:flex; align-items:center; justify-content:center; margin-bottom:1rem;}
+  .service-card h3{font-family:var(--display); font-size:1.15rem; margin:0 0 0.5rem; color:var(--teal);}
+  .service-card p{color:var(--muted); font-size:0.92rem; margin:0 0 0.9rem;}
+  .service-card .price{font-family:var(--mono); font-size:0.85rem; color:var(--gold); font-weight:600;}
+
+  /* BOOKING */
+  #booking{background:var(--bone-2);}
+  .booking-shell{background:#fff; border:1px solid var(--line); border-radius:20px; padding:2.2rem; box-shadow:0 20px 50px -30px rgba(18,51,47,0.25);}
+  .booking-grid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:2rem;}
+  .step-label{font-family:var(--mono); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--gold); margin:0 0 0.8rem;}
+  .option-list{display:flex; flex-direction:column; gap:0.55rem;}
+  .option{
+    border:1.5px solid var(--line); border-radius:10px; padding:0.7rem 0.9rem; cursor:pointer; font-size:0.9rem;
+    display:flex; justify-content:space-between; align-items:center; transition:border-color .15s ease, background .15s ease;
+    background:none; text-align:left; width:100%; font-family:var(--sans); color:var(--ink);
+  }
+  .option:hover{border-color:var(--gold);}
+  .option.selected{border-color:var(--teal); background:rgba(18,51,47,0.05); font-weight:600;}
+  .option .tick{opacity:0; color:var(--teal);}
+  .option.selected .tick{opacity:1;}
+  .slot-grid{display:grid; grid-template-columns:1fr 1fr; gap:0.55rem;}
+  .slot{border:1.5px solid var(--line); border-radius:10px; padding:0.55rem; text-align:center; cursor:pointer; font-family:var(--mono); font-size:0.82rem; background:none;}
+  .slot:hover{border-color:var(--gold);}
+  .slot.selected{border-color:var(--teal); background:rgba(18,51,47,0.05); font-weight:600;}
+  .slot.taken{opacity:0.35; text-decoration:line-through; cursor:not-allowed;}
+  .booking-summary{margin-top:1.8rem; padding-top:1.6rem; border-top:1px dashed var(--line); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem;}
+  .summary-text{font-size:0.92rem; color:var(--muted);}
+  .summary-text b{color:var(--teal);}
+  .confirm-panel{display:none; text-align:center; padding:2.4rem 1rem;}
+  .confirm-panel.show{display:block;}
+  .confirm-check{width:64px; height:64px; border-radius:50%; background:var(--mint); display:flex; align-items:center; justify-content:center; margin:0 auto 1.2rem;}
+  .confirm-panel h3{font-family:var(--display); font-size:1.5rem; color:var(--teal); margin:0 0 0.5rem;}
+  .confirm-panel p{color:var(--muted); max-width:36ch; margin:0 auto;}
+
+  /* TESTIMONIALS */
+  .testi-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem;}
+  .testi{background:#fff; border:1px solid var(--line); border-radius:14px; padding:1.5rem;}
+  .testi p{font-style:italic; color:var(--ink); margin:0 0 0.9rem;}
+  .testi cite{font-family:var(--mono); font-size:0.78rem; color:var(--muted); font-style:normal;}
+
+  footer{padding:2.5rem 1.5rem; text-align:center; border-top:1px solid var(--line); color:var(--muted); font-size:0.85rem;}
+  footer a{color:var(--teal); font-weight:600;}
+
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr;}
+    .services-grid, .testi-grid{grid-template-columns:1fr 1fr;}
+    .booking-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:640px){
+    nav.links{display:none;}
+    .services-grid, .testi-grid{grid-template-columns:1fr;}
+    .slot-grid{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-banner">This is a live demo built for Enoch's portfolio — a working preview of a real booking flow. <a href="enoch-portfolio.html">← Back to portfolio</a></div>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="logo">Brightleaf<span>.</span></div>
+    <nav class="links">
+      <a href="#services">Services</a>
+      <a href="#booking">Book online</a>
+      <a href="#reviews">Reviews</a>
+    </nav>
+    <a class="nav-cta" href="#booking">Book appointment</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">Accepting new patients</p>
+      <h1>Dental care that fits <em>your</em> schedule, not the other way around.</h1>
+      <p class="lead">Same-page booking, transparent pricing, and a team that actually calls you back. Most visitors book their first appointment in under a minute.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#booking">Book your visit →</a>
+        <a class="btn btn-outline" href="#services">See services</a>
+      </div>
+      <div class="trust-row">
+        <div class="stat"><b>4.9★</b><span>210+ Google reviews</span></div>
+        <div class="stat"><b>1.1s</b><span>page load time</span></div>
+        <div class="stat"><b>+64%</b><span>online bookings, 3mo</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="tooth-badge">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M12 2C8 2 5 4.5 5 8.5c0 2.8 1 4.3 1.5 6.6.4 1.9.5 5.4 2 5.9 1.7.5 1.8-3 2.5-3s.8 3.5 2.5 3c1.5-.5 1.6-4 2-5.9.5-2.3 1.5-3.8 1.5-6.6C19 4.5 16 2 12 2Z" stroke="#12332F" stroke-width="1.6"/></svg>
+      </div>
+      <h3>Next available</h3>
+      <p>Live availability pulled straight from the practice calendar.</p>
+      <div class="mini-slot"><span>Tomorrow, 10:30 AM</span><span class="ok">Open</span></div>
+      <div class="mini-slot"><span>Tomorrow, 2:00 PM</span><span class="ok">Open</span></div>
+      <div class="mini-slot"><span>Thu, 9:00 AM</span><span class="ok">Open</span></div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section id="services">
+  <div class="wrap">
+    <h2 class="section-title">Services</h2>
+    <p class="section-sub">Clear pricing up front — no surprise line items after the visit.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="icon">🦷</div>
+        <h3>General checkup</h3>
+        <p>Cleaning, exam, and X-rays with same-day results.</p>
+        <div class="price">from $95</div>
+      </div>
+      <div class="service-card">
+        <div class="icon">✨</div>
+        <h3>Whitening</h3>
+        <p>In-office whitening, visible results in one session.</p>
+        <div class="price">from $220</div>
+      </div>
+      <div class="service-card">
+        <div class="icon">🩺</div>
+        <h3>Emergency care</h3>
+        <p>Same-day slots held daily for urgent pain or breaks.</p>
+        <div class="price">from $130</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section id="booking">
+  <div class="wrap">
+    <h2 class="section-title">Book your appointment</h2>
+    <p class="section-sub">Pick a service, a day, and a time. This whole flow lives on one page — no account required.</p>
+
+    <div class="booking-shell">
+      <div id="bookingFlow">
+        <div class="booking-grid">
+          <div>
+            <p class="step-label">1 · Service</p>
+            <div class="option-list" id="serviceList">
+              <button class="option selected" data-service="Checkup &amp; cleaning">Checkup &amp; cleaning <span class="tick">✓</span></button>
+              <button class="option" data-service="Whitening">Whitening <span class="tick">✓</span></button>
+              <button class="option" data-service="Emergency visit">Emergency visit <span class="tick">✓</span></button>
+            </div>
+          </div>
+          <div>
+            <p class="step-label">2 · Day</p>
+            <div class="option-list" id="dayList">
+              <button class="option selected" data-day="Tomorrow, Jul 14">Tomorrow, Jul 14 <span class="tick">✓</span></button>
+              <button class="option" data-day="Wed, Jul 15">Wed, Jul 15 <span class="tick">✓</span></button>
+              <button class="option" data-day="Thu, Jul 16">Thu, Jul 16 <span class="tick">✓</span></button>
+            </div>
+          </div>
+          <div>
+            <p class="step-label">3 · Time</p>
+            <div class="slot-grid" id="slotGrid">
+              <button class="slot selected" data-slot="9:00 AM">9:00 AM</button>
+              <button class="slot" data-slot="10:30 AM">10:30 AM</button>
+              <button class="slot taken" disabled data-slot="12:00 PM">12:00 PM</button>
+              <button class="slot" data-slot="2:00 PM">2:00 PM</button>
+              <button class="slot" data-slot="3:30 PM">3:30 PM</button>
+              <button class="slot taken" disabled data-slot="4:30 PM">4:30 PM</button>
+            </div>
+          </div>
+        </div>
+        <div class="booking-summary">
+          <p class="summary-text">Booking <b id="sumService">checkup &amp; cleaning</b> on <b id="sumDay">tomorrow, Jul 14</b> at <b id="sumSlot">9:00 AM</b>.</p>
+          <button class="btn btn-primary" id="confirmBtn" type="button">Confirm appointment →</button>
+        </div>
+      </div>
+
+      <div class="confirm-panel" id="confirmPanel">
+        <div class="confirm-check">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#12332F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>You're booked.</h3>
+        <p>A confirmation and reminder text will be sent before your visit. This is a portfolio demo, so nothing was actually scheduled.</p>
+        <div style="margin-top:1.6rem;"><a class="btn btn-outline" href="#" id="resetBtn">Book another slot</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section id="reviews">
+  <div class="wrap">
+    <h2 class="section-title">What patients say</h2>
+    <div class="testi-grid">
+      <div class="testi"><p>"Booked online in the evening and had a slot the next morning. Didn't expect that."</p><cite>— Dana R.</cite></div>
+      <div class="testi"><p>"First dentist site where I didn't have to call to actually see open times."</p><cite>— Marcus T.</cite></div>
+      <div class="testi"><p>"Clean, fast, no popups. Just picked a time and showed up."</p><cite>— Priya K.</cite></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Brightleaf Dental — a demo site built to show what a real booking flow looks like. Part of <a href="enoch-portfolio.html">Enoch's portfolio</a>.</p>
+</footer>
+
+<script>
+  function wireGroup(selector, summaryId, textTransform){
+    document.querySelectorAll(selector).forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if (btn.disabled) return;
+        document.querySelectorAll(selector).forEach(function(b){ b.classList.remove('selected'); });
+        btn.classList.add('selected');
+        var val = btn.dataset.service || btn.dataset.day || btn.dataset.slot;
+        document.getElementById(summaryId).textContent = textTransform ? textTransform(val) : val;
+      });
+    });
+  }
+  wireGroup('#serviceList .option', 'sumService', function(v){ return v.toLowerCase(); });
+  wireGroup('#dayList .option', 'sumDay', function(v){ return v.toLowerCase(); });
+  wireGroup('#slotGrid .slot', 'sumSlot');
+
+  document.getElementById('confirmBtn').addEventListener('click', function(){
+    document.getElementById('bookingFlow').style.display = 'none';
+    document.getElementById('confirmPanel').classList.add('show');
+  });
+  document.getElementById('resetBtn').addEventListener('click', function(e){
+    e.preventDefault();
+    document.getElementById('confirmPanel').classList.remove('show');
+    document.getElementById('bookingFlow').style.display = 'block';
+  });
+</script>
+
+</body>
+</html>

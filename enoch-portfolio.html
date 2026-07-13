@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enoch — Web Developer</title>
+<meta name="description" content="Enoch builds fast, reliable websites and web apps for businesses that need results, not just pages.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0c1210;
+    --surface: #141c19;
+    --surface-2: #1b2521;
+    --line: #2a3630;
+    --amber: #ffb300;
+    --amber-dim: #c98c1f;
+    --green: #5fcb8c;
+    --text: #ede9dc;
+    --text-muted: #8d9690;
+    --text-faint: #5c655f;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+    --sans: 'Inter', -apple-system, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;} }
+
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:var(--sans); line-height:1.65; font-size:16px;
+    background-image:
+      linear-gradient(rgba(255,179,0,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,179,0,0.025) 1px, transparent 1px);
+    background-size: 42px 42px;
+  }
+
+  a{color:var(--amber); text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  ::selection{ background:var(--amber); color:#0c1210; }
+  :focus-visible{ outline:2px solid var(--amber); outline-offset:3px; }
+
+  .wrap{max-width:1080px; margin:0 auto; padding:0 1.5rem;}
+  .eyebrow{
+    font-family:var(--mono); font-size:0.78rem; letter-spacing:0.14em;
+    text-transform:uppercase; color:var(--amber-dim); margin:0 0 0.9rem;
+  }
+  .eyebrow::before{content:"// "; color:var(--text-faint);}
+
+  /* ---------- NAV ---------- */
+  .navbar{
+    position:sticky; top:0; z-index:50;
+    background:rgba(12,18,16,0.86); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:1080px; margin:0 auto; padding:0 1.5rem;
+    display:flex; align-items:center; gap:0.25rem; height:52px; overflow-x:auto;
+  }
+  .dots{display:flex; gap:6px; padding-right:0.9rem; margin-right:0.6rem; border-right:1px solid var(--line); flex-shrink:0;}
+  .dot{width:10px; height:10px; border-radius:50%;}
+  .dot.r{background:#ff5f56;} .dot.y{background:#ffbd2e;} .dot.g{background:#27c93f;}
+  .tab{
+    font-family:var(--mono); font-size:0.82rem; color:var(--text-muted);
+    padding:0.9rem 0.85rem; white-space:nowrap; border-bottom:2px solid transparent;
+    transition:color .15s ease, border-color .15s ease;
+  }
+  .tab:hover{ color:var(--text); text-decoration:none; }
+  .tab.active{ color:var(--amber); border-color:var(--amber); }
+  .nav-cta{
+    margin-left:auto; flex-shrink:0;
+    font-family:var(--mono); font-size:0.78rem; font-weight:600;
+    background:var(--amber); color:#111; padding:0.5rem 0.9rem; border-radius:5px;
+  }
+  .nav-cta:hover{ text-decoration:none; background:#ffc633; }
+
+  /* ---------- HERO ---------- */
+  header.hero{ padding:5rem 1.5rem 4rem; }
+  .terminal{
+    max-width:760px; margin:0 auto; background:var(--surface);
+    border:1px solid var(--line); border-radius:10px; overflow:hidden;
+    box-shadow:0 20px 60px -20px rgba(0,0,0,0.6);
+  }
+  .term-bar{
+    display:flex; align-items:center; gap:6px; padding:0.7rem 0.9rem;
+    background:var(--surface-2); border-bottom:1px solid var(--line);
+  }
+  .term-title{
+    font-family:var(--mono); font-size:0.75rem; color:var(--text-faint);
+    margin:0 auto; padding-right:36px;
+  }
+  .term-body{ padding:1.6rem 1.7rem 2rem; font-family:var(--mono); font-size:0.95rem; }
+  .term-line{ color:var(--text-muted); margin:0 0 0.3rem; }
+  .term-line .path{ color:var(--green); }
+  .term-line .cmd{ color:var(--text); }
+  #typed{ color:var(--text); white-space:pre-wrap; }
+  .cursor{ display:inline-block; width:8px; height:1.1em; background:var(--amber); vertical-align:text-bottom; animation:blink 1s step-end infinite; margin-left:1px; }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  h1.name{
+    font-family:var(--mono); font-size:clamp(2.1rem,5vw,3rem); font-weight:800;
+    margin:1rem 0 0.4rem; letter-spacing:-0.01em;
+  }
+  h1.name span{ color:var(--amber); }
+  .tagline{ font-size:1.05rem; color:var(--text-muted); max-width:34ch; margin:0 0 1.6rem; }
+  .hero-actions{ display:flex; gap:0.8rem; flex-wrap:wrap; }
+  .btn{
+    font-family:var(--mono); font-size:0.85rem; font-weight:600;
+    padding:0.7rem 1.2rem; border-radius:6px; display:inline-flex; align-items:center; gap:0.5rem;
+    transition:transform .15s ease, background .15s ease, border-color .15s ease;
+  }
+  .btn:hover{ text-decoration:none; transform:translateY(-2px); }
+  .btn-primary{ background:var(--amber); color:#111; }
+  .btn-primary:hover{ background:#ffc633; }
+  .btn-ghost{ background:transparent; color:var(--text); border:1px solid var(--line); }
+  .btn-ghost:hover{ border-color:var(--amber-dim); }
+
+  /* ---------- SECTIONS ---------- */
+  section{ padding:4.5rem 0; }
+  section.reveal{ opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease; }
+  section.reveal.in-view{ opacity:1; transform:none; }
+  h2{
+    font-family:var(--mono); font-size:1.7rem; margin:0 0 1.4rem; color:var(--text);
+    font-weight:700;
+  }
+  .rule{ border:none; border-top:1px solid var(--line); margin:0; }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{ display:grid; grid-template-columns:1.3fr 1fr; gap:3rem; align-items:start; }
+  .about-grid p{ color:var(--text-muted); max-width:56ch; }
+  .stack-list{ list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:0.5rem; }
+  .stack-list li{
+    font-family:var(--mono); font-size:0.78rem; color:var(--text);
+    background:var(--surface); border:1px solid var(--line); padding:0.4rem 0.7rem; border-radius:5px;
+  }
+  .stat-row{ display:flex; gap:2.2rem; margin-top:1.8rem; flex-wrap:wrap; }
+  .stat b{ display:block; font-family:var(--mono); font-size:1.7rem; color:var(--amber); }
+  .stat span{ font-size:0.8rem; color:var(--text-faint); }
+
+  /* ---------- PROJECTS ---------- */
+  .project{
+    background:var(--surface); border:1px solid var(--line); border-radius:10px;
+    margin-bottom:1.8rem; overflow:hidden;
+    transition:border-color .2s ease, transform .2s ease;
+  }
+  .project:hover{ border-color:var(--amber-dim); transform:translateY(-3px); }
+  .project-bar{
+    display:flex; align-items:center; gap:8px; padding:0.65rem 0.9rem;
+    background:var(--surface-2); border-bottom:1px solid var(--line);
+  }
+  .project-bar .file{ font-family:var(--mono); font-size:0.78rem; color:var(--text-muted); }
+  .project-body{ padding:1.8rem; }
+  .project-role{ font-family:var(--mono); font-size:0.72rem; color:var(--text-faint); text-transform:uppercase; letter-spacing:0.08em; margin:0 0 0.3rem;}
+  .project h3{ font-family:var(--mono); font-size:1.35rem; margin:0 0 0.7rem; color:var(--text); }
+  .project .brief{ color:var(--text-muted); margin:0 0 1.1rem; max-width:64ch; }
+  .project .brief b{ color:var(--text); font-weight:600; }
+  .metrics{ display:flex; flex-wrap:wrap; gap:0.6rem; margin:0 0 1.2rem; }
+  .metric{
+    font-family:var(--mono); font-size:0.78rem; color:var(--green);
+    background:rgba(95,203,140,0.08); border:1px solid rgba(95,203,140,0.28);
+    padding:0.35rem 0.65rem; border-radius:5px;
+  }
+  .metric::before{ content:"▲ "; }
+  .tags{ display:flex; flex-wrap:wrap; gap:0.4rem; margin:0 0 1.3rem; }
+  .tag{ font-family:var(--mono); font-size:0.72rem; color:var(--text-muted); border:1px solid var(--line); padding:0.25rem 0.55rem; border-radius:4px; }
+  .project-links{ display:flex; gap:1.3rem; }
+  .project-links a{ font-family:var(--mono); font-size:0.82rem; font-weight:600; }
+
+  /* ---------- TESTIMONIALS ---------- */
+  .quote-log{ font-family:var(--mono); font-size:0.85rem; }
+  .quote{
+    background:var(--surface); border:1px solid var(--line); border-left:3px solid var(--amber);
+    border-radius:6px; padding:1.3rem 1.5rem; margin-bottom:1rem;
+  }
+  .quote p{ font-family:var(--sans); font-size:1rem; color:var(--text); margin:0 0 0.7rem; font-style:italic; }
+  .quote cite{ font-family:var(--mono); font-style:normal; font-size:0.78rem; color:var(--text-faint); }
+
+  /* ---------- CONTACT ---------- */
+  #contact .terminal{ margin:0; max-width:none; }
+  #contact .term-body{ padding:2.2rem 1.7rem 2.4rem; }
+  #contact .term-body p{ color:var(--text-muted); font-family:var(--sans); font-size:1rem; max-width:52ch; margin:0.8rem 0 1.6rem; }
+  #contact h2{ font-family:var(--mono); margin:0.4rem 0 0; }
+
+  footer{
+    padding:2rem 1.5rem; text-align:center; border-top:1px solid var(--line);
+    font-family:var(--mono); font-size:0.78rem; color:var(--text-faint);
+  }
+  footer .prompt{ color:var(--text-muted); }
+
+  @media (max-width:760px){
+    .about-grid{ grid-template-columns:1fr; gap:2rem; }
+    .stat-row{ gap:1.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <span class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></span>
+    <a class="tab active" href="#top">home.html</a>
+    <a class="tab" href="#about">about.md</a>
+    <a class="tab" href="#projects">projects/</a>
+    <a class="tab" href="#contact">contact.sh</a>
+    <a class="nav-cta" href="#contact">hire-me →</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="terminal">
+      <div class="term-bar">
+        <span class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></span>
+        <p class="term-title">enoch — zsh</p>
+      </div>
+      <div class="term-body">
+        <p class="term-line"><span class="path">enoch@dev</span><span class="cmd">:~$ whoami</span></p>
+        <p id="typed" aria-live="polite"></p><span class="cursor" aria-hidden="true"></span>
+      </div>
+    </div>
+
+    <h1 class="name">Enoch<span>.</span></h1>
+    <p class="tagline">Web developer. I turn briefs into fast, working websites — the kind that load quick, convert visitors, and don't break at 2am.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="mailto:ayyeah60@gmail.com">Start a project</a>
+      <a class="btn btn-ghost" href="#projects">View case studies ↓</a>
+    </div>
+  </div>
+</header>
+
+<hr class="rule">
+
+<section id="about" class="reveal">
+  <div class="wrap">
+    <p class="eyebrow">01 — about</p>
+    <h2>Who's building your site</h2>
+    <div class="about-grid">
+      <div>
+        <p>I'm Enoch, a web developer who builds sites and small applications for businesses that need to look credible and actually work — fast pages, clear structure, forms that submit, checkouts that complete. No bloated templates, no half-finished features.</p>
+        <p>I handle a project end to end: design decisions, front-end build, back-end wiring, deployment, and the boring-but-critical stuff like performance and SEO basics. If you need someone to hand a project to and stop worrying about it, that's the role I play.</p>
+        <div class="stat-row">
+          <div class="stat"><b>3</b><span>shipped projects</span></div>
+          <div class="stat"><b>&lt;5</b><span>day avg. delivery*</span></div>
+          <div class="stat"><b>98</b><span>best Lighthouse score</span></div>
+        </div>
+      </div>
+      <div>
+        <p class="eyebrow" style="margin-top:0.2rem;">stack</p>
+        <ul class="stack-list">
+          <li>HTML / CSS</li><li>JavaScript</li><li>React</li><li>Next.js</li>
+          <li>Node.js</li><li>PostgreSQL</li><li>MongoDB</li><li>Tailwind</li>
+          <li>Stripe</li><li>Git</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section id="projects" class="reveal">
+  <div class="wrap">
+    <p class="eyebrow">02 — selected work</p>
+    <h2>Projects</h2>
+
+    <article class="project">
+      <div class="project-bar">
+        <span class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></span>
+        <span class="file">projects/brightleaf-dental.tsx</span>
+      </div>
+      <div class="project-body">
+        <p class="project-role">Local business · booking system</p>
+        <h3>Brightleaf Dental</h3>
+        <p class="brief">A dental practice was losing patients to a slow, unbookable site. I rebuilt it with a <b>same-page booking flow</b>, clear service pages, and local SEO fundamentals — so a search became an appointment in under a minute.</p>
+        <div class="metrics">
+          <span class="metric">+64% online bookings in 3 months</span>
+          <span class="metric">98 Lighthouse performance</span>
+          <span class="metric">1.1s load time</span>
+        </div>
+        <div class="tags"><span class="tag">Next.js</span><span class="tag">Tailwind</span><span class="tag">Node.js</span><span class="tag">SEO</span></div>
+        <div class="project-links">
+          <a href="brightleaf-dental.html" target="_blank" rel="noopener">Live demo →</a>
+          <a href="brightleaf-dental.html#reviews" target="_blank" rel="noopener">Read the case study →</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="project">
+      <div class="project-bar">
+        <span class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></span>
+        <span class="file">projects/coastline-realty.tsx</span>
+      </div>
+      <div class="project-body">
+        <p class="project-role">Real estate · property search</p>
+        <h3>Coastline Realty</h3>
+        <p class="brief">A coastal real estate agency was losing leads to a static listings PDF and a contact form nobody checked. I built a <b>searchable listings site with live filters</b> and same-page showing scheduling, so a browse turns into a booked tour in a couple of taps.</p>
+        <div class="metrics">
+          <span class="metric">+48% showing requests, 60 days</span>
+          <span class="metric">142 listings, instant filtering</span>
+          <span class="metric">Zero-call booking flow</span>
+        </div>
+        <div class="tags"><span class="tag">React</span><span class="tag">Node.js</span><span class="tag">PostgreSQL</span><span class="tag">Search &amp; filtering</span></div>
+        <div class="project-links">
+          <a href="coastline-realty.html" target="_blank" rel="noopener">Live demo →</a>
+          <a href="coastline-realty.html" target="_blank" rel="noopener">Read the case study →</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="project">
+      <div class="project-bar">
+        <span class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></span>
+        <span class="file">projects/fernway-market.tsx</span>
+      </div>
+      <div class="project-body">
+        <p class="project-role">E-commerce · full store build</p>
+        <h3>Fernway Market</h3>
+        <p class="brief">A fashion retailer needed an online store that didn't feel like a template. I built a <b>custom catalog, cart, and Stripe checkout</b> with an admin dashboard for managing inventory — then rebuilt the checkout flow to cut drop-off.</p>
+        <div class="metrics">
+          <span class="metric">+31% checkout completion</span>
+          <span class="metric">$12K+ sales, first 30 days</span>
+          <span class="metric">3-step checkout</span>
+        </div>
+        <div class="tags"><span class="tag">Next.js</span><span class="tag">Stripe</span><span class="tag">PostgreSQL</span></div>
+        <div class="project-links">
+          <a href="fernway-market.html" target="_blank" rel="noopener">Live demo →</a>
+          <a href="fernway-market.html#about" target="_blank" rel="noopener">Read the case study →</a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section id="testimonials" class="reveal">
+  <div class="wrap">
+    <p class="eyebrow">03 — feedback</p>
+    <h2>What clients said</h2>
+    <div class="quote-log">
+      <div class="quote">
+        <p>"Enoch rebuilt our booking flow in days, not weeks, and actually explained why it would help before he touched anything."</p>
+        <cite>— Owner, Brightleaf Dental</cite>
+      </div>
+      <div class="quote">
+        <p>"People started booking showings straight from the site instead of calling in. It just works, and he was responsive the whole way through."</p>
+        <cite>— Broker, Coastline Realty</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section id="contact" class="reveal">
+  <div class="wrap">
+    <p class="eyebrow">04 — contact</p>
+    <div class="terminal">
+      <div class="term-bar">
+        <span class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></span>
+        <p class="term-title">contact.sh</p>
+      </div>
+      <div class="term-body">
+        <p class="term-line"><span class="path">enoch@dev</span><span class="cmd">:~$ ./contact.sh --start-project</span></p>
+        <h2>Let's build something that works.</h2>
+        <p>Tell me what you're trying to build and what it needs to do. I'll reply with next steps and a realistic timeline — usually within a day.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="mailto:ayyeah60@gmail.com">ayyeah60@gmail.com</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="prompt">enoch@dev:~$</span> © 2026 Enoch. Built by hand, not a template.
+  <br style="margin-top:4px;">*Timeline varies with project scope.
+</footer>
+
+<script>
+  // Typewriter effect for hero
+  (function(){
+    var el = document.getElementById('typed');
+    var text = "> Enoch — Web Developer.\n> Turning briefs into fast, working websites.";
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced) { el.textContent = text; return; }
+    var i = 0;
+    function tick(){
+      if (i <= text.length){
+        el.textContent = text.slice(0, i);
+        i++;
+        setTimeout(tick, 18);
+      }
+    }
+    tick();
+  })();
+
+  // Scroll reveal
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) { els.forEach(function(e){ e.classList.add('in-view'); }); return; }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){ entry.target.classList.add('in-view'); io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.12 });
+    els.forEach(function(e){ io.observe(e); });
+  })();
+
+  // Active tab highlighting on scroll
+  (function(){
+    var sections = ['top','about','projects','contact'].map(function(id){ return document.getElementById(id); });
+    var tabs = document.querySelectorAll('.tab');
+    if (!('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){
+          tabs.forEach(function(t){ t.classList.remove('active'); });
+          var match = document.querySelector('.tab[href="#' + entry.target.id + '"]');
+          if (match) match.classList.add('active');
+        }
+      });
+    }, { threshold: 0.5 });
+    sections.forEach(function(s){ if (s) io.observe(s); });
+  })();
+</script>
+
+</body>
+</html>
